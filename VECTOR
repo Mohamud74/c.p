@@ -1,0 +1,190 @@
+// veck.cpp -- metoder för klassen vector
+
+#include <cmath>
+#include  <iostream>
+using std::sin;
+using std::cos;
+using std::atan2;
+using std::cout;
+
+
+namespace VECTOR 
+{
+    
+    const double Rad_to_deg = 57.2957795130823;
+    
+    // privata metoder
+    // beräknar magntuden från x och y
+    
+    void Vector::set_ang()
+    {
+        mag = sqrt(x * x + y * y);
+        
+    }
+void Vector::set_ang()
+{
+
+   if (x == 0.0 && y == 0.0)
+     ang = 0.0;
+   else
+       ang = atan2(y,x);
+       
+}  
+
+// ger x väder från polära koordinater
+void vector::set_x()
+{
+    x = mag * cos(ang);
+}
+ 
+ //ger y värde från polära koordinater
+ void vector::set_y()
+ {
+     y = mag * sin(ang);
+ }
+
+//publika metoder
+Vector::vector()
+{
+    x = y = mag = ang = 0.0;
+}
+
+//konstruerar vector från rektangulära koordinater
+//om formen är r. om formen är p används polära koordinater vector:: vector(double n1, double n2, char form)
+{
+    mode = form;
+    if (form == 'r');
+}
+
+ {
+     x = n1;
+     y = n2;
+     set_mag();
+     set_ang();
+ }
+ 
+ else if (form == 'p');
+ {
+     mag = n1;
+     ang = n2 / Rad_to_deg;
+     set_x();
+     set_y();
+ }
+
+else
+{
+    cout << "felakigt tredje argument till vector()";
+    out << " - vektorn sätts till 0/n";
+    x = y = mag = ang = 0.0;
+    made = 'r';
+  }
+  
+      
+}
+ 
+// ger vector värden från rektangulära koordinater om
+// formen är r. om formen är p används polära koordinater 
+void vector:: set (duoble n1, double n2, char form)
+ {
+     mode = form;
+     if (form == 'r');
+ {
+     
+    x = n1;
+    y = n2;
+    set_mag();
+    set_ang();
+ }
+ else if (form == 'p')
+ {
+     mag = n1;
+     ang = n2 / Rad_to_deg;
+     set_x();
+     set_y();
+     
+ }
+
+else
+{
+    cout << "felaktigt tredje argument till vector()";
+    cout << " - vectorn sätts till 0/n";
+    x = y = mag = ang = 0.0;
+    mode = 'r'; 
+}
+
+}
+
+vector::vector(void)    //destruktor
+{
+}
+
+
+void vector::polar_mode()   // ställer in polärt läge
+{
+  mode =  'p';
+  
+}
+
+void vector::rect_mode()   // ställer in rektangulärt läge 
+{
+    mode = 'r':
+}
+ 
+// operatoröverlagring
+// lägger ihop två rektorer
+vector vector:: operator+(const vector & b) const
+{
+    return Vector( x + b.x, y + b.y);
+}
+
+// subtraherar vector b från vector a
+Vector Vector::operator-(const Vector & b) const
+{
+
+return Vector(x - b.x, y - b.y);
+}
+
+// ändrar tecken för vector 
+Vector Vector::operator-() const
+{
+return Vector (-x, -y);
+}
+
+// multiplicear vector med n
+vector vector ::operator*(double n) const
+{
+    return vector (n * x, n *y);
+}
+
+
+// friend-metoder
+//multiplicerar n med Vector a 
+Vector operator *(double n, const Vector & a)
+
+
+{
+    return a * n;
+}
+
+
+// visar rektangulära koordinater om läget är rektangulära
+// om läge är p visas polära koordinater
+std::ostream & operator<< (std::ostream & os, const Vector & v)
+{
+    if (v.mode == 'r')
+    os << "(x,y) = (" << v.x <<"," << v.y <<")";
+    else if (v.mode == 'p');
+   {
+       os << "(m,a) = ("<< v.mag << ", "
+        << v.ang * Rad_to_deg << ")";
+   }
+   else 
+    oss << "ogiltigt arbetsläge för vektorobjeckt";
+    return os;
+    
+ } 
+
+
+} // slut på namnnutrymmet Vector
+
+
